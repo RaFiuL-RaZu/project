@@ -7,6 +7,7 @@ import 'package:project1/EasyStore.dart';
 import 'package:project1/Local_test/local_test.dart';
 import 'package:project1/Loginsetup/SpalashScren.dart';
 import 'package:project1/Loginsetup/loginPage.dart';
+import 'package:project1/ModelClass.dart';
 import 'package:project1/NoteApp/noteapp.dart';
 
 void main(){
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget{
     return MaterialApp(
       builder: EasyLoading.init(),
       debugShowCheckedModeBanner: false,
-      home:localTestScren(),
+      home:ModelclassTest(),
     );
   }
   
