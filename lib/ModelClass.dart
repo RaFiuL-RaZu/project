@@ -10,11 +10,13 @@ class ModelclassTest extends StatefulWidget {
 }
 
 class _ModelclassTestState extends State<ModelclassTest> {
-  StudentModel1 model=StudentModel1();
+ List<StudentModel1> model=<StudentModel1>[];
 
   dataCover(){
-    var jsndata={"id":"102621","name":"Rafiul Razu","dept":"CSE","sec":"B"};
-    model=StudentModel1.fromJson(jsndata);
+    for(var i in studentInfo){
+    var jsndata= StudentModel1.fromJson(i);
+    model.add(jsndata);
+    }
 
   }
 
@@ -22,7 +24,7 @@ class _ModelclassTestState extends State<ModelclassTest> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("${model.name}"),
+        title: Text("Model Class"),
         centerTitle: true,
         actions: [
           IconButton(onPressed: (){
@@ -35,7 +37,7 @@ class _ModelclassTestState extends State<ModelclassTest> {
         ],
       ),
       body:ListView.builder(
-        itemCount: studentInfo1.length,
+        itemCount: model.length,
           itemBuilder: (context,index){
         return Card(
           child:Padding(
@@ -48,12 +50,12 @@ class _ModelclassTestState extends State<ModelclassTest> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("${studentInfo1[index].name}"),
-                    Text("${studentInfo1[index].dept}"),
+                    Text("${model[index].name}"),
+                    Text("${model[index].dept}"),
                   ],
                 ),
                 Spacer(),
-                Text("${studentInfo1[index].sec}"),
+                Text("${model[index].sec}"),
               ],
             ),
           ),
