@@ -2,8 +2,9 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:project1/Login_Data_Store/Data_Store.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart' show EasyLoading;
+import 'package:shared_preferences/shared_preferences.dart' show SharedPreferences;
+
 
 class localTestScren extends StatefulWidget {
   const localTestScren({super.key});
@@ -22,22 +23,28 @@ class _localTestScrenState extends State<localTestScren> {
       body: Center(
         child: Column(
           children: [
-            ElevatedButton(onPressed: (){
-            //   log("========Add Data=======");
-            //   FlutterSecureStorage storage=FlutterSecureStorage();
-            // await storage.write(key: "name", value: "Razu");
-              AppLocate().dataInsertFun("name", "Razu");
-
+            ElevatedButton(onPressed: ()async{
+              final SharedPreferences prefs = await SharedPreferences.getInstance();
+              prefs.setInt("id",102621);
+              EasyLoading.show();
+             await Future.delayed(Duration(seconds: 3));
+             // EasyLoading.dismiss();
+              EasyLoading.showSuccess('Added succesfully');
+            log("========Add Data=======");
 
             }, child:Text("Add Data")),
             SizedBox(height: 50,),
-            ElevatedButton(onPressed: (){
-             AppLocate().dataGetFun("name");
+            ElevatedButton(onPressed: ()async{
+              final SharedPreferences prefs = await SharedPreferences.getInstance();
+             var data= prefs.get("id");
+             log("==========Show data: ${data}====");
 
             }, child:Text("Show Data")),
             SizedBox(height: 50,),
-            ElevatedButton(onPressed: (){
-              AppLocate().dataDeleteFun("name");
+            ElevatedButton(onPressed: ()async{
+              final SharedPreferences prefs = await SharedPreferences.getInstance();
+              prefs.remove("id");
+              log("==========delete data====");
 
             }, child:Text("Delete Data")),
           ],

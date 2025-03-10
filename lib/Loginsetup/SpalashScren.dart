@@ -39,7 +39,7 @@ class _SpalashScreenState extends State<SpalashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Image.network("https://courseadvisorbd.com/wp-content/uploads/2023/09/Untitled-design-4-3.png"),
+        child: Image.network("https://png.pngtree.com/png-vector/20220509/ourmid/pngtree-company-logo-design-trademark-design-creative-logo-png-image_4569380.png"),
       ),
     );
   }
