@@ -1,10 +1,8 @@
-
-
 class PostModel {
   final String name_en;
   final int reg_price;
-  final String ? dis_price;
-  final String ? image;
+  final String? dis_price;
+  final String? image;
   final String brand;
   PostModel({
     required this.name_en,
@@ -13,4 +11,8 @@ class PostModel {
     this.image,
     required this.brand,
   });
+
+  factory PostModel.fromJson(Map<String, dynamic> json) {
+    return PostModel(name_en:json['name_en'], reg_price:json['reg_price'], brand:json['brand']);
+  }
 }
