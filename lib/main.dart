@@ -3,12 +3,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart' show EasyLoading;
+import 'package:project1/APICLass/PostModel.dart';
+import 'package:project1/APICLass/ShowDataSCren.dart';
 import 'package:project1/EasyStore.dart';
-import 'package:project1/Local_test/local_test.dart';
-import 'package:project1/Loginsetup/SpalashScren.dart';
-import 'package:project1/Loginsetup/loginPage.dart';
-import 'package:project1/ModelClass.dart';
-import 'package:project1/NoteApp/noteapp.dart';
+import 'package:project1/Testing.dart';
+
 
 void main(){
   EasySetting().setting();
@@ -26,7 +25,7 @@ class MyApp extends StatelessWidget{
     return MaterialApp(
       builder: EasyLoading.init(),
       debugShowCheckedModeBanner: false,
-      home:ModelclassTest(),
+      home:DataSHowSCreen(),
     );
   }
   
