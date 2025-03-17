@@ -15,8 +15,6 @@ class DataSHowSCreen extends StatefulWidget {
 class _DataSHowSCreenState extends State<DataSHowSCreen> {
   List<PostModel> post = [];
 
-
-
   // @override
   // void initState() {
   //   // TODO: implement initState
@@ -39,23 +37,23 @@ class _DataSHowSCreenState extends State<DataSHowSCreen> {
         centerTitle: true,
         backgroundColor: Colors.amber,
       ),
-      body:FutureBuilder(future:ApiServices.fetchData(), builder:(context,snapshot){
+      body: FutureBuilder(
+        future: ApiServices.fetchData(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          }
 
-        if(snapshot.connectionState == ConnectionState.waiting){
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-        return GridView.builder(
-            itemCount:snapshot.data!.length,
+          return GridView.builder(
+            itemCount: snapshot.data!.length,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               childAspectRatio: 0.8,
               crossAxisSpacing: 10,
               mainAxisSpacing: 10,
             ),
-            itemBuilder:(context,index){
-              final data=snapshot.data![index];
+            itemBuilder: (context, index) {
+              final data = snapshot.data![index];
               return Card(
                 child: SizedBox(
                   height: 150,
@@ -67,24 +65,47 @@ class _DataSHowSCreenState extends State<DataSHowSCreen> {
                           height: 150,
                           width: double.infinity,
                           color: Colors.grey,
-                          child: Image.network("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFYqoKTu_o3Zns2yExbst2Co84Gpc2Q1RJbA&s",fit: BoxFit.fill,),
+                          child: Image.network(
+                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFYqoKTu_o3Zns2yExbst2Co84Gpc2Q1RJbA&s",
+                            fit: BoxFit.fill,
+                          ),
                         ),
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Text("Name : ${data.name_en}",style: TextStyle(fontSize: 17,fontWeight: FontWeight.w600),),
-                          Text("Regular Price : ${data.reg_price}",style: TextStyle(fontSize: 17,fontWeight: FontWeight.w600),),
-                          Text("Discount Price : ${data.brand}",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w500),),
+                          Text(
+                            "Name : ${data.name_en}",
+                            style: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          Text(
+                            "Regular Price : ${data.reg_price}",
+                            style: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          Text(
+                            "Discount Price : ${data.brand}",
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
                         ],
-                      )
+                      ),
                     ],
                   ),
                 ),
               );
-            });
-      })
+            },
+          );
+        },
+      ),
     );
   }
 }
