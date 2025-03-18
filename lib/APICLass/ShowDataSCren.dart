@@ -2,8 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:project1/APICLass/PostDetails.dart';
 import 'package:project1/APICLass/PostModel.dart';
-import 'package:project1/ApiServices.dart';
+import 'package:project1/APICLass/ApiServices.dart';
 
 class DataSHowSCreen extends StatefulWidget {
   const DataSHowSCreen({super.key});
@@ -14,20 +15,6 @@ class DataSHowSCreen extends StatefulWidget {
 
 class _DataSHowSCreenState extends State<DataSHowSCreen> {
   List<PostModel> post = [];
-
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   super.initState();
-  //   fetchData();
-  // }
-  // fetchData()async{
-  //   final data=await ApiServices.fetchData();
-  //   print(data!.length);
-  //   setState(() {
-  //     post=data;
-  //   });
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -54,51 +41,56 @@ class _DataSHowSCreenState extends State<DataSHowSCreen> {
             ),
             itemBuilder: (context, index) {
               final data = snapshot.data![index];
-              return Card(
-                child: SizedBox(
-                  height: 150,
-                  width: 100,
-                  child: Column(
-                    children: [
-                      Expanded(
-                        child: Container(
-                          height: 150,
-                          width: double.infinity,
-                          color: Colors.grey,
-                          child: Image.network(
-                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFYqoKTu_o3Zns2yExbst2Co84Gpc2Q1RJbA&s",
-                            fit: BoxFit.fill,
+              return InkWell(
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Postdetails(postId: data.productId.toString(),)));
+                },
+                child: Card(
+                  child: SizedBox(
+                    height: 150,
+                    width: 100,
+                    child: Column(
+                      children: [
+                        Expanded(
+                          child: Container(
+                            height: 150,
+                            width: double.infinity,
+                            color: Colors.grey,
+                            child: Image.network(
+                              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFYqoKTu_o3Zns2yExbst2Co84Gpc2Q1RJbA&s",
+                              fit: BoxFit.fill,
+                            ),
                           ),
                         ),
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Name : ${data.name_en}",
-                            style: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.w600,
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Name : ${data.name_en}",
+                              style: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
-                          ),
-                          Text(
-                            "Regular Price : ${data.reg_price}",
-                            style: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.w600,
+                            Text(
+                              "Regular Price : ${data.reg_price}",
+                              style: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
-                          ),
-                          Text(
-                            "Discount Price : ${data.brand}",
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
+                            Text(
+                              "Discount Price : ${data.brand}",
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               );

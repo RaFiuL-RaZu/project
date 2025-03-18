@@ -6,7 +6,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart' show EasyLoading;
 import 'package:project1/APICLass/PostModel.dart';
 import 'package:project1/APICLass/ShowDataSCren.dart';
 import 'package:project1/EasyStore.dart';
-import 'package:project1/ApiServices.dart';
+import 'package:project1/APICLass/ApiServices.dart';
 
 
 void main(){
