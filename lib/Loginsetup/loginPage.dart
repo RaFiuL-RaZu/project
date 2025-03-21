@@ -1,6 +1,9 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:project1/APICLass/ApiServices1.dart';
+import 'package:project1/Inherited.dart';
 import 'package:project1/Login_Data_Store/Data_Store.dart';
 import 'package:project1/NoteApp/noteapp.dart';
 
@@ -12,7 +15,7 @@ class loginPage extends StatefulWidget {
 }
 
 class _loginPageState extends State<loginPage> {
-  List<String> studentList = ["Razu", "Sazu", "Safin"];
+  // List<String> studentList = ["Razu", "Sazu", "Safin"];
 
   TextEditingController mailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -117,7 +120,8 @@ class _loginPageState extends State<loginPage> {
                       return "Empity file";
                     } else if (password.length < 8) {
                       return "must be 8 charecters";
-                    } else if (!RegExp(r'[A-Z]').hasMatch(password) &&
+
+                     } else if (!RegExp(r'[A-Z]').hasMatch(password) &&
                         RegExp(r'[a-z]').hasMatch(password) &&
                         RegExp(r'[0-9]').hasMatch(password)) {
                       return "password not Strong";
@@ -149,41 +153,46 @@ class _loginPageState extends State<loginPage> {
                       backgroundColor: Colors.deepPurple.shade400,
                     ),
                     onPressed: ()async{
-                      //if (myKey.currentState!.validate()) {
+                      EasyLoading.show();
+                     bool status=await ApiServices1.service(mailController.text,passwordController.text);
+                     if(status){
+                       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>DataShowScren()));
+                     }
+                      // if (myKey.currentState!.validate()) {
                       // return;
                       // }
-                      var count = 500;
-
-                      for (var studentName in studentList) {
-                        if (studentName == mailController.text) {
-                          log("====Log success");
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              backgroundColor: Colors.green,
-                              content: Text("Login Succesfully"),
-                            ),
-                          );
-                          
-                          AppLocate().dataInsertFun("login","yes");
-
-
-                          count = 1000;
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(builder: (context) => Noteapp()),
-                          );
-                          break;
-                        }
-                      }
-                      if (count == 500) {
-                        log("===Not found");
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            backgroundColor: Colors.red,
-                            content: Text("Wrong user,Please try again"),
-                          ),
-                        );
-                      }
+                      // var count = 500;
+                      //
+                      // for (var studentName in) {
+                      //   if (studentName == mailController.text) {
+                      //     log("====Log success");
+                      //     ScaffoldMessenger.of(context).showSnackBar(
+                      //       SnackBar(
+                      //         backgroundColor: Colors.green,
+                      //         content: Text("Login Succesfully"),
+                      //       ),
+                      //     );
+                      //
+                      //     AppLocate().dataInsertFun("login","yes");
+                      //
+                      //
+                      //     count = 1000;
+                      //     Navigator.pushReplacement(
+                      //       context,
+                      //       MaterialPageRoute(builder: (context) => Noteapp()),
+                      //     );
+                      //     break;
+                      //   }
+                      // }
+                      // if (count == 500) {
+                      //   log("===Not found");
+                      //   ScaffoldMessenger.of(context).showSnackBar(
+                      //     SnackBar(
+                      //       backgroundColor: Colors.red,
+                      //       content: Text("Wrong user,Please try again"),
+                      //     ),
+                      //   );
+                      // }
 
                       //  if(mailController.text=="rafi@gmail.com" && passwordController.text=="Rafi102621"){
                       //    log("=====login succesfully===");

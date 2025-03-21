@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:project1/APICLass/PostDetails.dart';
-import 'package:project1/APICLass/PostModel.dart';
-import 'package:project1/APICLass/ApiServices.dart';
+import 'package:project1/PracticeProject/ProductModelPart/PostModel.dart';
+import 'package:project1/PracticeProject/ApiPart/ApiServices.dart';
 
 class DataSHowSCreen extends StatefulWidget {
   const DataSHowSCreen({super.key});

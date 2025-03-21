@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:project1/APICLass/ApiServices.dart';
-import 'package:project1/APICLass/PostDetailsModel.dart';
+import 'package:project1/PracticeProject/ApiPart/ApiServices.dart';
+import 'package:project1/APICLass/ApiServices1.dart';
+import 'package:project1/PracticeProject/ProductModelPart/PostDetailsModel.dart';
 
 class Postdetails extends StatelessWidget {
   final String postId;
@@ -10,15 +11,13 @@ class Postdetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(postId), centerTitle: true),
-      body: FutureBuilder<PostDetailsModel?>(
-        future: ApiServices.singleGetFetch(postId),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
-          } else {
-            return Column(children: [Text(snapshot.data!.rating)]);
-          }
-        },
+      body:FutureBuilder(future: ApiServices.singleGetFetch(postId), builder:(context,snapshot){
+        return Column(
+          children: [
+            Text("${snapshot.data?.rating}"),
+          ],
+        );
+      }
       ),
     );
   }
