@@ -1,4 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:project1/PracticeProject/ApiPart/ApiController.dart';
+import 'package:project1/PracticeProject/ProductModelPart/PostModel.dart';
 
 class FontScreen extends StatefulWidget {
   const FontScreen({super.key});
@@ -8,6 +12,23 @@ class FontScreen extends StatefulWidget {
 }
 
 class _FontScreenState extends State<FontScreen> {
+
+  List<PostModel> post=[];
+
+  @override
+  void initState() {
+    super.initState();
+    fetchData();
+
+  }
+  fetchData()async{
+   final data= await ApiController.fetchData();
+   print(data!.length);
+   setState(() {
+     post=data;
+   });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,7 +113,7 @@ class _FontScreenState extends State<FontScreen> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12),
               child: GridView.builder(
-                itemCount: 10,
+                itemCount:post.length,
                 physics: ScrollPhysics(),
                 shrinkWrap: true,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -102,6 +123,7 @@ class _FontScreenState extends State<FontScreen> {
                   childAspectRatio: 0.7,
                 ),
                 itemBuilder: (context, index) {
+                  final data=post[index];
                   return Card(
                     child: SizedBox(
                       width: MediaQuery.sizeOf(context).width,
@@ -130,7 +152,7 @@ class _FontScreenState extends State<FontScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Brazil Authentic Jersey 2018",
+                                  data.name_en,
                                   maxLines: 1,
                                   style: TextStyle(
                                     fontSize: 16,
@@ -139,7 +161,7 @@ class _FontScreenState extends State<FontScreen> {
                                   ),
                                 ),
                                 Text(
-                                  "Brand :Addidas",
+                                  "Brand :${data.brand}",
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w600,
@@ -153,7 +175,7 @@ class _FontScreenState extends State<FontScreen> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        "Tk :850",
+                                        "Tk :${data.reg_price}",
                                         style: TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.w600,
